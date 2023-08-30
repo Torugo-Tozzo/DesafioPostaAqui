@@ -1,23 +1,32 @@
 "use client";
 import { useState } from "react";
 
-const Formulario = () => {
-  const [nomeCompleto, setNomeCompleto] = useState("");
-  const [cpf, setCpf] = useState("");
-  const [telefone, setTelefone] = useState("");
-  const [email, setEmail] = useState("");
-  const [cep, setCep] = useState("");
-  const [estado, setEstado] = useState("");
-  const [cidade, setCidade] = useState("");
-  const [bairro, setBairro] = useState("");
-  const [rua, setRua] = useState("");
-  const [numero, setNumero] = useState("");
-  const [complemento, setComplemento] = useState("");
+const Formulario = ({ onSubmit }) => {
+  const [formData, setFormData] = useState({
+    nomeCompleto: "",
+    cpf: "",
+    telefone: "",
+    email: "",
+    cep: "",
+    estado: "",
+    cidade: "",
+    bairro: "",
+    rua: "",
+    numero: "",
+    complemento: "",
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // lógica para enviar os dados do formulário para a API, 
-    // chamada a uma API usando Axios.
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit(formData);
   };
 
   return (
@@ -26,8 +35,9 @@ const Formulario = () => {
         <label>Nome Completo:</label>
         <input
           type="text"
-          value={nomeCompleto}
-          onChange={(e) => setNomeCompleto(e.target.value)}
+          name="nomeCompleto"
+          value={formData.nomeCompleto}
+          onChange={handleInputChange}
           required
         />
       </div>
@@ -35,8 +45,9 @@ const Formulario = () => {
         <label>CPF:</label>
         <input
           type="text"
-          value={cpf}
-          onChange={(e) => setCpf(e.target.value)}
+          name="cpf"
+          value={formData.cpf}
+          onChange={handleInputChange}
           required
         />
       </div>
@@ -44,8 +55,9 @@ const Formulario = () => {
         <label>Telefone:</label>
         <input
           type="text"
-          value={telefone}
-          onChange={(e) => setTelefone(e.target.value)}
+          name="telefone"
+          value={formData.telefone}
+          onChange={handleInputChange}
           required
         />
       </div>
@@ -53,8 +65,9 @@ const Formulario = () => {
         <label>Email:</label>
         <input
           type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
           required
         />
       </div>
@@ -62,8 +75,9 @@ const Formulario = () => {
         <label>CEP:</label>
         <input
           type="text"
-          value={cep}
-          onChange={(e) => setCep(e.target.value)}
+          name="cep"
+          value={formData.cep}
+          onChange={handleInputChange}
           required
         />
       </div>
@@ -71,8 +85,9 @@ const Formulario = () => {
         <label>Estado:</label>
         <input
           type="text"
-          value={estado}
-          onChange={(e) => setEstado(e.target.value)}
+          name="estado"
+          value={formData.estado}
+          onChange={handleInputChange}
           required
         />
       </div>
@@ -80,8 +95,9 @@ const Formulario = () => {
         <label>Cidade:</label>
         <input
           type="text"
-          value={cidade}
-          onChange={(e) => setCidade(e.target.value)}
+          name="cidade"
+          value={formData.cidade}
+          onChange={handleInputChange}
           required
         />
       </div>
@@ -89,8 +105,9 @@ const Formulario = () => {
         <label>Bairro:</label>
         <input
           type="text"
-          value={bairro}
-          onChange={(e) => setBairro(e.target.value)}
+          name="bairro"
+          value={formData.bairro}
+          onChange={handleInputChange}
           required
         />
       </div>
@@ -98,8 +115,9 @@ const Formulario = () => {
         <label>Rua:</label>
         <input
           type="text"
-          value={rua}
-          onChange={(e) => setRua(e.target.value)}
+          name="rua"
+          value={formData.rua}
+          onChange={handleInputChange}
           required
         />
       </div>
@@ -107,8 +125,9 @@ const Formulario = () => {
         <label>Número:</label>
         <input
           type="text"
-          value={numero}
-          onChange={(e) => setNumero(e.target.value)}
+          name="numero"
+          value={formData.numero}
+          onChange={handleInputChange}
           required
         />
       </div>
@@ -116,11 +135,12 @@ const Formulario = () => {
         <label>Complemento:</label>
         <input
           type="text"
-          value={complemento}
-          onChange={(e) => setComplemento(e.target.value)}
+          name="complemento"
+          value={formData.complemento}
+          onChange={handleInputChange}
         />
       </div>
-      <button type="submit">Enviar</button>
+      <button type="submit">Confirmar</button>
     </form>
   );
 };
